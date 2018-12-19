@@ -55,5 +55,82 @@ function callBackfn(e)
 //</1>
 
 //<2> This is project 2 for Api testing
+const url2 = "https://randomuser.me/api/";
+const btn2 = document.querySelector("#button2");
+const output2 = document.querySelector('#output2');
+const intake = document.querySelector("input");
+
+btn2.addEventListener("click",getInput);
+
+function getInput()
+{
+    document.getElementById('content2').style.border = "solid orange";
+    document.getElementById('content2').style.padding = "15px";
+    document.getElementById('content2').style.textAlign = "center";
+    const xml = new XMLHttpRequest();
+    let inputvalue = intake.value;
+    let urlquery = url2+"?results="+inputvalue;
+    xml.onload = function()
+    {
+        if(xml.readyState === 4 && xml.status == "200")
+        {
+            let data = JSON.parse(xml.responseText).results;
+            outputHTML(data);
+        }
+        else{
+            console.log("Error");
+        }
+    }
+    xml.open("GET",urlquery);
+    xml.send();
+    console.log(intake.value);
+}
+
+function outputHTML(data)
+{
+    console.log("WE SHOULD BE OUTPUTTING INFO")
+    console.log(data);
+    output2.innerHTML = "";
+    for(let index = 0; index < data.length; index++)
+    {
+        output2.innerHTML += data[index].email + "<br>";
+    }
+}
 
 //</2>
+
+
+//<3> This is project 3 for Api testing using fetch, promises
+const btn3 = document.querySelector("#button3");
+const output3 = document.querySelector("#output3");
+const intake2 = document.querySelector("#input2");
+
+btn3.addEventListener("click",getInput2);
+
+function getInput2()
+{
+    document.getElementsByClassName('Project3')[0].style.border = "solid lightblue";
+    document.getElementsByClassName('Project3')[0].style.padding = "15px";
+    document.getElementsByClassName('Project3')[0].style.textAlign = "center";
+    fetch(url2)
+    .then
+    (
+        function(response)
+        {
+           return response.json();
+           //return response;
+           //console.log(response);
+        }
+    )
+    .then
+    (
+        function(data)
+        {
+            //console.log(JSON.stringify(myJson));
+            console.log(data.results);
+        }
+    );
+}
+
+
+//</3>
