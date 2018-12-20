@@ -109,10 +109,14 @@ btn3.addEventListener("click",getInput2);
 
 function getInput2()
 {
+    output3.innerHTML = "";
     document.getElementsByClassName('Project3')[0].style.border = "solid lightblue";
     document.getElementsByClassName('Project3')[0].style.padding = "15px";
     document.getElementsByClassName('Project3')[0].style.textAlign = "center";
-    fetch(url2)
+
+    let userInput = intake2.value;
+    let urlQuery = url2 + "?results=" + userInput;
+    fetch(urlQuery)
     .then
     (
         function(response)
@@ -128,6 +132,10 @@ function getInput2()
         {
             //console.log(JSON.stringify(myJson));
             console.log(data.results);
+            for(let x = 0;x < data.results.length;x++)
+            {
+                output3.innerHTML += data.results[x].name.first + "<br>";
+            }
         }
     );
 }
