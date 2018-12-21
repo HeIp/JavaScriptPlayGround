@@ -55,6 +55,7 @@ function callBackfn(e)
 //</1>
 
 //<2> This is project 2 for Api testing
+
 const url2 = "https://randomuser.me/api/";
 const btn2 = document.querySelector("#button2");
 const output2 = document.querySelector('#output2');
