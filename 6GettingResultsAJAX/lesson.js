@@ -1,43 +1,40 @@
+const button = document.querySelector('button');
+const output = document.querySelector('#output');
+const input = document.querySelector('input');
+const url = "https://randomuser.me/api/";
 
-const url = "https://api.chucknorris.io/jokes/random";
-const outputHTML = document.querySelector('#output');
-var button = document.querySelector('button');
+button.addEventListener("click", getInput);
 
-button.addEventListener('click', callApi );
-
-function callApi()
+function getInput()
 {
-    console.log("Api call sent");
     const xml = new XMLHttpRequest();
-    xml.onreadystatechange = function()
+    let tempUrl = url + '?results=' + input.value;
+    xml.onload = function()
     {
-        //check it got the information
-        //and make sure it loaded properly
-        if(xml.readyState == 4)
+        if( xml.readyState == 4)
         {
             if(xml.status == 200)
             {
-                const response = xml.responseText;
-                const json = JSON.parse(response);
-                outputHTML.innerHTML = json.value + '<br><img src="'+json.icon_url+'">';
-                
+                let data = JSON.parse(xml.responseText).results;
+                console.log(data);
+                outputHTML(data);
             }
             else
             {
-                outputHTML.innerHTML = "ERROR!";
+                output.innerHTML = "ERROR!";
             }
-        }      
+        }
     }
-    xml.open("GET", url);
+    xml.open('get', tempUrl);
     xml.send();
-
-    xml.addEventListener("progress", getProgress);
-    xml.addEventListener("load", getProgress);
-    xml.addEventListener("error", getProgress);
-    //get progress event info
-    function getProgress(e)
-    {
-        console.log(e);
-    }
+    console.log(input.value);
 }
 
+function outputHTML(data)
+{
+    console.log(data);
+    for(let i = 0; i < data.length;i++)
+    {
+        output.innerHTML += data[i].email + '<br>';
+    }
+}
