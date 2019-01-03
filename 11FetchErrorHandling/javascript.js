@@ -1,4 +1,4 @@
-//Lesson 11 & 12
+//Lesson 11
 
 const btn = document.querySelector("button");
 const output = document.querySelector("#output");
