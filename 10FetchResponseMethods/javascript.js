@@ -19,6 +19,7 @@ function getInput()
     (
         function(response)
         {
+            //.blob used with images
            return response.blob();
            //return response;
            //console.log(response);
@@ -30,6 +31,7 @@ function getInput()
         {
             //console.log(JSON.stringify(myJson));
             console.log(data);
+            //creating dynamic object url
             let pathImage = URL.createObjectURL(data);
             document.querySelector("img").src = pathImage;
         }
